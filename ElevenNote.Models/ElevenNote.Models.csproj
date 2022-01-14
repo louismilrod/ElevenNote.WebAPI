@@ -54,15 +54,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NoteCreate.cs" />
-    <Compile Include="NoteDetail.cs" />
-    <Compile Include="NoteEdit.cs" />
-    <Compile Include="NoteListItem.cs" />
+    <Compile Include="NoteModels\NoteCreate.cs" />
+    <Compile Include="NoteModels\NoteDetail.cs" />
+    <Compile Include="NoteModels\NoteEdit.cs" />
+    <Compile Include="NoteModels\NoteListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CategoryModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

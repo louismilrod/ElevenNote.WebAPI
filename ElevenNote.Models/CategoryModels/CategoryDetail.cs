@@ -10,5 +10,7 @@ namespace ElevenNote.Models.CategoryModels
     {
         public int CategoryId { get; set; }
         public string Name { get; set; }
+
+        public DateTimeOffset ModifiedUtc { get; set; }
     }
 }

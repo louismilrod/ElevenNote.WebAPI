@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace ElevenNote.Services
 {
@@ -62,13 +63,16 @@ namespace ElevenNote.Services
                 var entity = 
                     ctx
                         .Notes
+                        .Include(n=>n.Category)
                         .Single(e => e.NoteId == id && e.OwnerId == _userId);
+               
                 return
                     new NoteDetail
                     {
                         NoteId = entity.NoteId,
                         Title = entity.Title,
                         Content = entity.Content,
+                        CategoryName = entity.Category.Name,
                         CreatedUtc = entity.CreatedUtc,
                         ModifiedUtc = entity.ModifiedUtc
                     };
@@ -82,10 +86,12 @@ namespace ElevenNote.Services
                 var entity = 
                     ctx 
                         .Notes
+                        .Include(n => n.Category)
                         .Single(e => e.NoteId == model.NoteId && e.OwnerId == _userId);
 
                 entity.Title = model.Title;
                 entity.Content = model.Content;
+                entity.Category.Name = model.CategoryName;
                 entity.ModifiedUtc = DateTimeOffset.UtcNow;
 
                 return ctx.SaveChanges() == 1;

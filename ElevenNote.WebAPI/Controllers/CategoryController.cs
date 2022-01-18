@@ -1,4 +1,5 @@
-﻿using ElevenNote.Models.CategoryModels;
+﻿using ElevenNote.Models;
+using ElevenNote.Models.CategoryModels;
 using ElevenNote.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -44,6 +45,29 @@ namespace ElevenNote.WebAPI.Controllers
             CategoryService catService = CreateCategoryService();
             var category = catService.GetCategoryById(id);
             return Ok(category);
+        }
+
+        public IHttpActionResult Put(CategoryEdit category)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var service = CreateCategoryService();
+
+            if (!service.UpdateCategory(category))
+            {
+                return InternalServerError();
+            }
+
+            return Ok(category);
+        }
+
+        public IHttpActionResult Delete(int id)
+        {
+            var catService = CreateCategoryService();
+
+            if (!catService.DeleteCategory(id)) return InternalServerError();
+
+            return Ok("deleted!");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ElevenNote.Data;
+using ElevenNote.Models;
 using ElevenNote.Models.CategoryModels;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,8 @@ namespace ElevenNote.Services
                     {
                         CategoryId = c.CategoryId,
                         Name = c.Name,
-                        CreatedUtc = c.CreatedUtc
+                        CreatedUtc = c.CreatedUtc,
+                        ModifiedUtc = c.ModifiedUtc
                     });
                 return query.ToArray();
             }
@@ -57,8 +59,40 @@ namespace ElevenNote.Services
                     new CategoryDetail
                     {
                         CategoryId = entity.CategoryId,
-                        Name = entity.Name
+                        Name = entity.Name,
+                        ModifiedUtc = entity.ModifiedUtc
                     };
+            }
+        }
+
+        public bool UpdateCategory(CategoryEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Categories
+                        .Single(c => c.CategoryId == model.CategoryId);
+
+                entity.Name = model.Name;
+                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeleteCategory(int noteId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Categories
+                        .Single(c => c.CategoryId == noteId);
+
+                ctx.Categories.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
             }
         }
     }

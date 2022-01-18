@@ -11,6 +11,7 @@ namespace ElevenNote.Data
     {
         [Key]
         public int CategoryId { get; set; }
+        public Guid OwnerId { get; set; }
         [Required]
         [MaxLength(25, ErrorMessage = "You can only have 25 characters per category")]
         public string Name { get; set; }

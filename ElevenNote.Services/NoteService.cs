@@ -24,6 +24,7 @@ namespace ElevenNote.Services
                 OwnerId = _userId,
                 Title = model.Title,
                 Content = model.Content,
+                CategoryId = model.CategoryId,
                 CreatedUtc = DateTimeOffset.Now
             };
 
@@ -46,7 +47,9 @@ namespace ElevenNote.Services
                     { 
                         NoteId = e.NoteId, 
                         Title = e.Title,
-                        CreatedUtc = e.CreatedUtc 
+                        CreatedUtc = e.CreatedUtc,
+                        CategoryName = e.Category.Name,
+                        CategoryId = e.CategoryId
                     });
                 return query.ToArray();
             }

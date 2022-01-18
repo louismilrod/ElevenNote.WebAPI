@@ -10,9 +10,8 @@ namespace ElevenNote.Models.CategoryModels
     public class CatgoryCreate
     {
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; }        
         
-        [Required]
         public DateTimeOffset CreatedUtc { get; set; }
 
     }

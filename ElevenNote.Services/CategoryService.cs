@@ -8,11 +8,11 @@ namespace ElevenNote.Services
 {
     public class CategoryService
     {
-        private readonly int _categoryId;
+        private readonly Guid _userId;
 
-        public CategoryService (int id)
+        public CategoryService (Guid id)
         {
-            _categoryId = id;
+            _userId = id;
         }
 
         public bool CreateCategory(CatgoryCreate model)
@@ -35,7 +35,7 @@ namespace ElevenNote.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var query = ctx.Categories
-                    .Where(c => c.CategoryId == _categoryId)
+                    .Where(c => c.OwnerId == _userId)
                     .Select(c => new CategoryListItem
                     {
                         CategoryId = c.CategoryId,

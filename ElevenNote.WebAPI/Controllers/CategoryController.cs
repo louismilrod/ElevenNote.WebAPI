@@ -1,5 +1,6 @@
 ﻿using ElevenNote.Models.CategoryModels;
 using ElevenNote.Services;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,12 @@ namespace ElevenNote.WebAPI.Controllers
     [Authorize]
     public class CategoryController : ApiController
     {
-        private readonly int _categoryId;
+        
         private CategoryService CreateCategoryService()
         {
-            return new CategoryService(_categoryId);
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var categoryService = new CategoryService(userId);
+            return categoryService;
         }
 
         public IHttpActionResult Get() 

@@ -38,5 +38,12 @@ namespace ElevenNote.WebAPI.Controllers
 
             return Ok();
         }
+
+        public IHttpActionResult Get(int id)
+        {
+            CategoryService catService = CreateCategoryService();
+            var category = catService.GetCategoryById(id);
+            return Ok(category);
+        }
     }
 }

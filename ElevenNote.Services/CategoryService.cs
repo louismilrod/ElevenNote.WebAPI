@@ -34,8 +34,7 @@ namespace ElevenNote.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Categories
-                    .Where(c => c.OwnerId == _userId)
+                var query = ctx.Categories                    
                     .Select(c => new CategoryListItem
                     {
                         CategoryId = c.CategoryId,
@@ -43,6 +42,23 @@ namespace ElevenNote.Services
                         CreatedUtc = c.CreatedUtc
                     });
                 return query.ToArray();
+            }
+        }
+
+        public CategoryDetail GetCategoryById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Categories
+                        .Single(c => c.CategoryId == id);
+                return
+                    new CategoryDetail
+                    {
+                        CategoryId = entity.CategoryId,
+                        Name = entity.Name
+                    };
             }
         }
     }

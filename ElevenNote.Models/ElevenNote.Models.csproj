@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryModels\CategoryDetail.cs" />
     <Compile Include="CategoryModels\CategoryListItem.cs" />
     <Compile Include="CategoryModels\CatgoryCreate.cs" />
     <Compile Include="NoteModels\NoteCreate.cs" />

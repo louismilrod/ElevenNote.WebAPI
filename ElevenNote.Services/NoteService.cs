@@ -25,9 +25,9 @@ namespace ElevenNote.Services
                 OwnerId = _userId,
                 Title = model.Title,
                 Content = model.Content,
-                CategoryId = model.CategoryId,
-                CreatedUtc = DateTimeOffset.Now
-            };
+                CategoryId = model.CategoryId,                
+                CreatedUtc = DateTimeOffset.Now                
+            };            
 
             using (var ctx = new ApplicationDbContext())
             {
@@ -94,7 +94,7 @@ namespace ElevenNote.Services
                 entity.Category.Name = model.CategoryName;
                 entity.ModifiedUtc = DateTimeOffset.UtcNow;
 
-                return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() > 0;
             }
         }
 

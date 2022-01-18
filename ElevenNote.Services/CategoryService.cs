@@ -10,6 +10,7 @@ namespace ElevenNote.Services
     public class CategoryService
     {
         private readonly Guid _userId;
+        private readonly ApplicationUser _user;
 
         public CategoryService (Guid id)
         {
@@ -20,8 +21,9 @@ namespace ElevenNote.Services
         {
             var category = new Category()
             {
+                OwnerId = _userId,
                 Name = model.Name,
-                CreatedUtc = DateTimeOffset.Now
+                CreatedUtc = DateTimeOffset.Now                
             };
 
             using (var ctx = new ApplicationDbContext())
@@ -35,7 +37,8 @@ namespace ElevenNote.Services
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var query = ctx.Categories                    
+                var query = ctx.Categories
+                    
                     .Select(c => new CategoryListItem
                     {
                         CategoryId = c.CategoryId,
